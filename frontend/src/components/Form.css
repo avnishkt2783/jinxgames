@@ -3,18 +3,24 @@
 .form-container {
     width: 100%;
     max-width: 400px;
-    margin: 60px auto;
-    padding: 30px;
-    background-color: #f9f9f9;
+    margin: auto;
+    /* padding: 30px; */
+    /* background-color: #f9f9f9; */
     border-radius: 12px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
+
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   }
   
   .form-heading {
     margin-bottom: 20px;
     font-size: 24px;
-    color: #333;
+    color: #ffffff;
   }
   
   .form-wrapper {
@@ -25,7 +31,7 @@
   
   .form-button {
     padding: 10px;
-    background-color: #007bff;
+    background-color: #0056b3;
     color: #fff;
     border: none;
     border-radius: 6px;
@@ -35,7 +41,7 @@
   }
   
   .form-button:hover {
-    background-color: #0056b3;
+    background-color: #d30b9a;
   }
   
   .form-message {

@@ -1,3 +1,4 @@
+// import './Form.css'
 const InputField = ({type = "text",name, placeholder, value, required, onChange})=>{
     return(
         <>

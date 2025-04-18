@@ -4,6 +4,7 @@ import LandingPage from './components/LandingPage';
 import Home from './components/Home';
 import LoginForm from './components/LoginForm';
 import RegistrationForm from './components/RegistrationFrom'
+import GamesPage from './components/GamesPage'
 
 function App() {
   return (
@@ -27,6 +28,12 @@ function App() {
           <Route path="/register" element={
             <>
               <RegistrationForm />
+            </>
+          } />
+
+          <Route path="/games" element={
+            <>
+              <GamesPage />
             </>
           } />
 

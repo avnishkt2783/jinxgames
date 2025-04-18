@@ -7,7 +7,8 @@ const LandingPage = () => {
 
     return(
         <div className="landing-container">
-        <h1 className="title">🎮 JinxGames</h1>
+        <img id="logo" src="jinx.png" alt="" />
+        {/* <h1 className="title">🎮 JinxGames</h1> */}
         <p className="tagline">Unleash the fun. Compete. Win.</p>
         
         <div className="button-group">

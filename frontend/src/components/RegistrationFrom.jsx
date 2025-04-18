@@ -2,6 +2,7 @@ import axios from "axios";
 import InputField from "./InputField"
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import "./Form.css";
 
 const RegistrationForm = () => {
     const navigate = useNavigate();
@@ -51,18 +52,57 @@ const RegistrationForm = () => {
 
 
     return(
-        <form onSubmit={handleSubmit}>
-            <InputField type="text" name="userName" placeholder="Enter Username" value={form.userName} onChange={handleChange} required/>
-            <InputField type="email" name="email" placeholder="Enter Email" value={form.email} onChange={handleChange} required/>
-            <InputField type="password" name="password" placeholder="Enter Password" value={form.password} onChange={handleChange} required/>
+        // <form onSubmit={handleSubmit}>
+        //     <InputField type="text" name="userName" placeholder="Enter Username" value={form.userName} onChange={handleChange} required/>
+        //     <InputField type="email" name="email" placeholder="Enter Email" value={form.email} onChange={handleChange} required/>
+        //     <InputField type="password" name="password" placeholder="Enter Password" value={form.password} onChange={handleChange} required/>
             
-            <button type="submit">Register</button>
-            {message && (
-                <p style={{ color: isSuccess ? "green" : "red", marginTop: "10px" }}>
-                    {message}
-                </p>
-            )}
-        </form>
+        //     <button type="submit">Register</button>
+        //     {message && (
+        //         <p style={{ color: isSuccess ? "green" : "red", marginTop: "10px" }}>
+        //             {message}
+        //         </p>
+        //     )}
+        // </form>
+
+        <div className="form-container">
+            <h2 className="form-heading">Welcome Player!</h2>
+            <form onSubmit={handleSubmit} className="form-wrapper">
+                <InputField
+                    type="text"
+                    name="userName"
+                    placeholder="Enter Username"
+                    value={form.userName}
+                    onChange={handleChange}
+                    required
+                />
+                <InputField
+                    type="email"
+                    name="email"
+                    placeholder="Enter Email"
+                    value={form.email}
+                    onChange={handleChange}
+                    required
+                />
+                <InputField
+                    type="password"
+                    name="password"
+                    placeholder="Enter Password"
+                    value={form.password}
+                    onChange={handleChange}
+                    required
+                />
+                <button type="submit" className="form-button">Register</button>
+                {message && (
+                    <p
+                        className="form-message"
+                        style={{ color: isSuccess ? "green" : "red" }}
+                    >
+                        {message}
+                    </p>
+                )}
+            </form>
+        </div>
     )
 }
 
