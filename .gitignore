@@ -1,0 +1,11 @@
+node_modules/ 
+
+backend/node_modules/
+backend/jinxgames_backend.zip
+backend/.gitignore
+backend/.env
+
+frontend/node_modules/
+frontend/jinxgames_frontend.zip
+frontend/.gitignore
+frontend/.env
