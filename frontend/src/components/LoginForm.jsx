@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import InputField from "./InputField";
-import { useNavigate } from "react-router-dom";
+
+import { useNavigate, Link } from "react-router-dom";
 import "./Form.css";
 
 const LoginForm = () => {
@@ -48,30 +49,6 @@ const LoginForm = () => {
     }, [user, navigate]);
 
     return (
-        // <form onSubmit={handleSubmit}>
-        //     <InputField
-        //         type="text"
-        //         name="userName"
-        //         placeholder="Enter Username"
-        //         value={form.userName}
-        //         onChange={handleChange}
-        //         required
-        //     />
-        //     <InputField
-        //         type="password"
-        //         name="password"
-        //         placeholder="Enter Password"
-        //         value={form.password}
-        //         onChange={handleChange}
-        //         required
-        //     />
-        //     <button type="submit">Login</button>
-        //     {message && (
-        //         <p style={{ color: isSuccess ? "green" : "red", marginTop: "10px" }}>
-        //             {message}
-        //         </p>
-        //     )}
-        // </form>
 
         <div className="form-container">
             <h2 className="form-heading">Welcome Back!</h2>
@@ -101,6 +78,7 @@ const LoginForm = () => {
                         {message}
                     </p>
                 )}
+                <p>New Registration : <Link to="/register">Register</Link></p>
             </form>
         </div>
     );

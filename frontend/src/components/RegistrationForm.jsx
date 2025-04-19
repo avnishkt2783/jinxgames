@@ -1,7 +1,8 @@
 import axios from "axios";
-import InputField from "./InputField"
+// import InputField from "./InputField"
+import InputField from "./InputField";
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import "./Form.css";
 
 const RegistrationForm = () => {
@@ -101,9 +102,10 @@ const RegistrationForm = () => {
                         {message}
                     </p>
                 )}
+                <p>Already Registered : <Link to="/login">Login</Link></p>
             </form>
         </div>
     )
 }
 
-export default RegistrationForm 
+export default RegistrationForm

@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import LandingPage from './components/LandingPage';
 import Home from './components/Home';
 import LoginForm from './components/LoginForm';
-import RegistrationForm from './components/RegistrationFrom'
+import RegistrationForm from './components/RegistrationForm'
 import GamesPage from './components/GamesPage'
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
             </>
           } />
 
-          <Route path="/Home" element={<Home />} />
+          <Route path="/home" element={<Home />} />
           
           <Route path="/login" element={
             <>

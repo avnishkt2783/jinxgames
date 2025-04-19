@@ -4,6 +4,7 @@ import cors from 'cors';
 import sequelize from "./config/db.js";
 import routes from "./routes/allRoutes.js"
 import "./models/user/user.js";
+import authenticate from './middleware/authenticate.js'
 
 const app = express();
 
@@ -11,6 +12,9 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static("public"))
 app.use(express.urlencoded({extended:true}));
+
+app.use(express.json())
+app.use(authenticate)
 app.use('/api/user', routes);
 
 sequelize.sync({ logging: console.log })

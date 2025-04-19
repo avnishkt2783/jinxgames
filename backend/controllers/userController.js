@@ -14,6 +14,10 @@ export const createUser = async (req, res) => {
             return res.status(400).json({ error: 'Email already registered' });
         }
 
+        const existingUserName = await User.findOne({where: {userName}});
+        if(existingUserName){
+            return res.status(400).json({error: 'Username already exists'});
+        }
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const user = await User.create({
@@ -48,6 +52,19 @@ export const loginUser = async (req, res) => {
         if (!isMatch) {
             return res.status(401).json({ error: 'Invalid password' });
         }
+
+        const token = jwt.sign(
+            {userId : user.userId},
+            process.env.JWT_KEY,
+            {expiresIn: '1h'}
+        )
+
+        res.status(200).json({
+            message: "Login Successful",
+            userId: user.userId,
+            userName: user.userName,
+            token
+        })
 
         // Optional: Update isLoggedIn status
         user.isLoggedIn = true;

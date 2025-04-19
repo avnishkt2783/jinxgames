@@ -6,10 +6,12 @@ const user = sequelize.define('user',{
         type:DataTypes.INTEGER,
         primaryKey:true,
         autoIncrement:true,
+        unique:true
     },
     userName:{
         type:DataTypes.STRING,
         allowNull:false,
+        unique:true
     },
     email:{
         type:DataTypes.STRING,
@@ -38,6 +40,6 @@ const user = sequelize.define('user',{
 },
 {
     freezeTableName: true
-})
+});
 
 export default user
