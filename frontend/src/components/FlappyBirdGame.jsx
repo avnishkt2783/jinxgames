@@ -305,25 +305,49 @@ const FlappyBirdGame = () => {
         {/* Start Button */}
         {!gameStarted && (
           <>
-            <p>Use Space-Bar to play.</p>
-            <button
-              onClick={startGame}
-              style={{
-                position: "absolute",
-                top: "60%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                fontSize: "30px",
-                padding: "10px 25px",
-                background: "rgb(41, 133, 255)",
-                color: "white",
-                border: "none",
-                borderRadius: "10px",
-                cursor: "pointer",
-              }}
-            >
-              START
-            </button>
+            {!gameOver ? (
+              <>
+                <p>Use Space-Bar to play.</p>
+                <h2 id="gameTitle">🕊️Flappy Bird</h2>
+                <button
+                  onClick={startGame}
+                  style={{
+                    position: "absolute",
+                    top: "60%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    fontSize: "30px",
+                    padding: "10px 25px",
+                    background: "rgb(41, 133, 255)",
+                    color: "white",
+                    border: "none",
+                    borderRadius: "10px",
+                    cursor: "pointer",
+                  }}
+                >
+                  START
+                </button>
+              </>
+            ) : (
+              <button
+                onClick={startGame}
+                style={{
+                  position: "absolute",
+                  top: "60%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  fontSize: "30px",
+                  padding: "10px 25px",
+                  background: "rgb(255, 41, 41)",
+                  color: "white",
+                  border: "none",
+                  borderRadius: "10px",
+                  cursor: "pointer",
+                }}
+              >
+                PLAY AGAIN
+              </button>
+            )}
           </>
         )}
 

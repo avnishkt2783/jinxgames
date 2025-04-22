@@ -1,5 +1,8 @@
+#gameTitle{
+  font-size: 100px;
+}
+
 .flappy-bird-game {
-    background-color: #70c5ce;
     position: relative;
     width: 100vw;
     height: 400px;

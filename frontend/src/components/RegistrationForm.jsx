@@ -6,6 +6,7 @@ import { useNavigate, Link } from "react-router-dom";
 import "./Form.css";
 import { useAuth } from "../AuthContext";
 import AuthNavbar from "./AuthNavbar";
+import "./Universal.css";
 
 const RegistrationForm = () => {
   const navigate = useNavigate();

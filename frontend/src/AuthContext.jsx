@@ -7,6 +7,9 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [user, setUser] = useState(() => {
     const savedToken = localStorage.getItem("token");
+
+    console.log("Decoded user:", jwtDecode(savedToken));
+
     return savedToken ? jwtDecode(savedToken) : null;
   });
 

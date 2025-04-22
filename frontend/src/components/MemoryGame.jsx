@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
 import Navbar from "./Navbar";
 import axios from "axios";
+import "./Universal.css";
 import "./MemoryGame.css";
 
 const MemoryGame = () => {
@@ -12,36 +12,6 @@ const MemoryGame = () => {
   const [message, setMessage] = useState("");
   const [gameOver, setGameOver] = useState(false);
   const [startTime, setStartTime] = useState(null);
-
-  const navigate = useNavigate();
-  const location = useLocation();
-  const previousLocation = useRef(location.pathname); // Keep track of where we were
-
-  const handleExit = () => {
-    if (!gameOver && round > 1) {
-      saveScore(round - 1);
-    }
-    navigate("/profile");
-  };
-
-  useEffect(() => {
-    return () => {
-      if (!gameOver && round > 1) {
-        console.log("Component unmounting. Saving score...");
-        saveScore(round - 1);
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    const handleBeforeUnload = (e) => {
-      if (!gameOver && round > 1) {
-        saveScore(round - 1);
-      }
-    };
-    window.addEventListener("beforeunload", handleBeforeUnload);
-    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
-  }, [gameOver, round]);
 
   useEffect(() => {
     if (!gameOver) {
@@ -130,15 +100,15 @@ const MemoryGame = () => {
       <div
         style={{
           backdropFilter: "blur(10px)",
-          margin: "5px auto",
+          padding: "10px",
+          margin: "10px auto",
           width: "80%",
           height: "80%",
-          overflow: "hidden",
           backgroundColor: "rgba(0, 0, 0, 0.5)",
           borderRadius: "1.5rem",
         }}
       >
-        <h2 id="gameTitle">🧠 Memory Game</h2>
+        <h2 id="memory-gameTitle">🧠 Memory Game</h2>
         <p id="subMessage">Game has started, Remember the sequence below.</p>
         <p id="roundStatus">Round: {round}</p>
         {showSequence ? (
@@ -161,13 +131,6 @@ const MemoryGame = () => {
           <>
             <button onClick={restartGame} className="restart-button">
               Restart
-            </button>
-            <button
-              onClick={handleExit}
-              className="restart-button"
-              style={{ backgroundColor: "#d9534f" }}
-            >
-              Exit Game
             </button>
           </>
         )}

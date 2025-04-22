@@ -5,6 +5,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext";
+import "./GameCard.css";
 
 const GamesPage = () => {
   const [games, setGames] = useState([]);
@@ -20,16 +21,6 @@ const GamesPage = () => {
   useEffect(() => {
     fetchGames(0, false);
   }, []);
-
-  // const handlePlay = async (gameId, route) => {
-  //   try {
-  //     await axios.post(`http://localhost:3000/api/games/${gameId}/play`);
-  //     fetchGames(0, false);
-  //     navigate(route);
-  //   } catch (err) {
-  //     console.error("Error updating times played:", err);
-  //   }
-  // };
 
   const handlePlay = async (gameId, route) => {
     if (!token) {
@@ -59,7 +50,7 @@ const GamesPage = () => {
       const res = await axios.get(
         `http://localhost:3000/api/games?limit=${limit}&offset=${newOffset}`
       );
-      // const newGames = res.data;
+
       console.log(res.data); // Add this line
       const { games: newGames, total } = res.data;
       setTotalGames(total);
@@ -116,19 +107,6 @@ const GamesPage = () => {
                     <strong>Times Played:</strong> {game.timesPlayed}
                   </p>
 
-                  {/* <button onClick={() => navigate(game.gameRoute)}>Play</button> */}
-
-                  {/* <button
-                    style={{
-                      backgroundColor: likedGames.includes(game.gameId)
-                        ? "tomato"
-                        : "lightgray",
-                    }}
-                    onClick={() => handleLikeToggle(game.gameId)}
-                  >
-                    {likedGames.includes(game.gameId) ? "Unlike" : "Like"}
-                  </button> */}
-
                   <button
                     onClick={() => handlePlay(game.gameId, game.gameRoute)}
                   >
@@ -137,7 +115,6 @@ const GamesPage = () => {
                 </div>
               ))}
             </div>
-            {/* <button onClick={fetchGames} className="show-more-btn">Show More</button> */}
             {totalGames > limit && (
               <button
                 onClick={showAll ? handleShowLess : handleShowMore}

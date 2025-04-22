@@ -1,12 +1,15 @@
 /* RPSGame.css - Updated for better visibility and contrast */
-
+/* 
 .rps-container {
     text-align: center;
     padding: 40px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #121212;
+    border-radius: 1.5rem;
+    background-color: rgba(0, 0, 0, 0.5);
     color: #f1f1f1;
-    min-height: 100vh;
+
+    margin: 10px auto;
+    width: 80%;
   }
   
   .rps-buttons {
@@ -63,4 +66,120 @@
   .rps-history li {
     margin-bottom: 10px;
     line-height: 1.5;
+  } */
+
+
+
+
+  .rps-container {
+    text-align: center;
+    padding: 40px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-radius: 1.5rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #f1f1f1;
+    margin: 10px auto;
+    width: 80%;
   }
+  
+  /* Title styling */
+  .rps-title {
+    font-size: 2.5rem;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+  
+  /* Buttons area */
+  .rps-buttons {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  /* Emoji Buttons */
+  .rps-choice-btn {
+    font-size: 3rem;
+    padding: 0.8rem 1.2rem;
+    background-color: #0048ff36;
+    color: #fff;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .rps-choice-btn:hover {
+    background-color: #1576c0;
+    transform: scale(1.1);
+  }
+  
+  /* Game Results Section */
+  .rps-results {
+    text-align: center;
+    margin-top: 30px;
+  }
+    
+  .rps-choice {
+    font-size: 2.8rem;
+  }
+  
+  .rps-result {
+    font-size: 2.2rem;
+    margin-top: 15px;
+    font-weight: bold;
+    color: #ffeb3b;
+  }
+  
+  /* Optional: History section (if you use it in the future) */
+  .rps-history {
+    margin-top: 30px;
+    text-align: left;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+  }
+  
+  .rps-history h4 {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #444;
+    padding-bottom: 5px;
+  }
+  
+  .rps-history ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .rps-history li {
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+  
+
+  .rps-choice-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 80px; /* adjust spacing as needed */
+    margin-top: 20px;
+  }
+  
+  .rps-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.3rem;
+    color: #f1f1f1;
+  }
+  
+  .rps-choice-icon {
+    font-size: 3.5rem;
+    margin-top: 10px;
+  }
+  

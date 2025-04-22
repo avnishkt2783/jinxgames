@@ -1,15 +1,38 @@
 import React from "react";
 import Navbar from "./Navbar";
 import MatchHistory from "../components/MatchHistory";
+import ProfileContent from "../components/ProfileContent";
+import "./Universal.css";
 
 const ProfilePage = () => {
   return (
     <>
       <Navbar />
-      <div style={{ padding: "2rem", textAlign: "center", color: "white" }}>
-        <h2>Profile Page</h2>
-        <p>Comimng soon...</p>
-        <h2>Match Histroy</h2>
+      <div
+        style={{
+          padding: "2rem",
+          textAlign: "center",
+          margin: "10px auto",
+          color: "white",
+        }}
+      >
+        <h2
+          style={{
+            marginTop: "0px",
+            marginBottom: "20px",
+          }}
+        >
+          Profile Page
+        </h2>
+        <ProfileContent />
+        <h2
+          style={{
+            marginTop: "30px",
+            marginBottom: "20px",
+          }}
+        >
+          Match Histroy
+        </h2>
         <MatchHistory />
       </div>
     </>
