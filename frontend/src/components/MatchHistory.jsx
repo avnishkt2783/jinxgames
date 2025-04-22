@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./MatchHistory.css";
 
+// import Footer from "./Footer"; // DO NOT IMPORT / INSERT FOOTER HERE
+
 const MatchHistory = () => {
   const [matches, setMatches] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);

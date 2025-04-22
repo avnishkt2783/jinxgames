@@ -3,6 +3,7 @@ import Navbar from "./Navbar";
 import axios from "axios";
 import "./Universal.css";
 import "./MemoryGame.css";
+import Footer from "./Footer";
 
 const MemoryGame = () => {
   const [sequence, setSequence] = useState([]);
@@ -135,6 +136,7 @@ const MemoryGame = () => {
           </>
         )}
       </div>
+      <Footer />
     </>
   );
 };

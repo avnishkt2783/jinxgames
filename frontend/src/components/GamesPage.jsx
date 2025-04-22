@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext";
 import "./GameCard.css";
+import Footer from "./Footer";
 
 const GamesPage = () => {
   const [games, setGames] = useState([]);
@@ -126,6 +127,7 @@ const GamesPage = () => {
           </>
         )}
       </div>
+      <Footer />
     </>
   );
 };

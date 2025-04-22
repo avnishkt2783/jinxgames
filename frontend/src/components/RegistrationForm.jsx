@@ -7,6 +7,7 @@ import "./Form.css";
 import { useAuth } from "../AuthContext";
 import AuthNavbar from "./AuthNavbar";
 import "./Universal.css";
+import Footer from "./Footer";
 
 const RegistrationForm = () => {
   const navigate = useNavigate();
@@ -141,6 +142,7 @@ const RegistrationForm = () => {
           </p>
         </form>
       </div>
+      <Footer />
     </>
   );
 };

@@ -3,6 +3,7 @@ import Navbar from "./Navbar";
 import MatchHistory from "../components/MatchHistory";
 import ProfileContent from "../components/ProfileContent";
 import "./Universal.css";
+import Footer from "./Footer";
 
 const ProfilePage = () => {
   return (
@@ -35,6 +36,7 @@ const ProfilePage = () => {
         </h2>
         <MatchHistory />
       </div>
+      <Footer />
     </>
   );
 };

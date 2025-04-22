@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Navbar from "./Navbar";
 import "./FlappyBirdGame.css";
+import Footer from "./Footer";
 
 const gameId = 3;
 
@@ -370,6 +371,7 @@ const FlappyBirdGame = () => {
           Speed: {pipeSpeed}
         </div>
       </div>
+      <Footer />
     </>
   );
 };

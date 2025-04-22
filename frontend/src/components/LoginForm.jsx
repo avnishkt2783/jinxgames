@@ -7,6 +7,7 @@ import { useAuth } from "../AuthContext";
 import "./Form.css";
 import AuthNavbar from "./AuthNavbar";
 import "./Universal.css";
+import Footer from "./Footer";
 
 const LoginForm = () => {
   const [form, setForm] = useState({
@@ -27,19 +28,6 @@ const LoginForm = () => {
       [e.target.name]: e.target.value,
     });
   };
-
-  // const validateForm = () => {
-  //     const usernameRegex = /^[A-Za-z][A-Za-z0-9_]*$/;
-  //     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{10,}$/;
-
-  //     if (!usernameRegex.test(form.userName)) {
-  //         return "Invalid username format.";
-  //     }
-  //     if (!passwordRegex.test(form.password)) {
-  //         return "Invalid password format.";
-  //     }
-  //     return null;
-  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -110,6 +98,7 @@ const LoginForm = () => {
           </p>
         </form>
       </div>
+      <Footer />
     </>
   );
 };

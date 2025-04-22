@@ -6,6 +6,7 @@ import { hangmanStages } from "../utils/hangmanStages";
 import Navbar from "./Navbar";
 import axios from "axios";
 import "./Universal.css";
+import Footer from "./Footer";
 
 const HangmanGame = () => {
   const [wordObj, setWordObj] = useState(null);
@@ -167,6 +168,7 @@ const HangmanGame = () => {
           </button>
         )}
       </div>
+      <Footer/>
     </>
   );
 };
