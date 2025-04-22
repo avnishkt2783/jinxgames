@@ -1,5 +1,5 @@
-import { DataTypes } from "sequelize";
-import sequelize from "../config/db.js";
+import sequelize from "../../config/db.js";
+import DataTypes from "sequelize";
 
 const Game = sequelize.define("game", {
     gameId: {
@@ -25,11 +25,11 @@ const Game = sequelize.define("game", {
         allowNull: false,
         defaultValue: 0
     },
-    likes: {
-        type: DataTypes.INTEGER,
+    gameRoute: {
+        type: DataTypes.STRING,
         allowNull: false,
-        defaultValue: 0
-    },
+        defaultValue: "/"
+    }
 },
 {
   freezeTableName: true,

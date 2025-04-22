@@ -1,0 +1,59 @@
+.hangman-game {
+    text-align: center;
+    padding: 2rem;
+    color: #fff;
+    background-color: #1e1e1e;
+    min-height: 100vh;
+  }
+  
+  .word-display p {
+    font-size: 2rem;
+    letter-spacing: 0.5rem;
+    margin: 1rem 0;
+  }
+  
+  .hint {
+    font-size: 1.2rem;
+    color: #ffd700;
+  }
+  
+  .wrong-guesses, .lives {
+    margin: 1rem 0;
+    font-size: 1.1rem;
+  }
+  
+  .letters button {
+    margin: 0.3rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    background-color: #444;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  .letters button:disabled {
+    background-color: #999;
+    cursor: not-allowed;
+  }
+  
+  .restart-btn {
+    margin-top: 2rem;
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    background-color: #28a745;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .game-status {
+    margin-top: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #00ffd9;
+  }
+  

@@ -1,0 +1,81 @@
+#gameTitle{
+    font-size: 40px;
+}
+
+#subMessage{
+    font-size: 20px;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+#roundStatus {
+    font-size: 20px;
+    color: #fff;
+    margin-bottom: 30px;
+}
+
+.sequence-display {
+    font-size: 2.5rem;
+    font-weight: bold;
+    letter-spacing: 0.3rem;
+    color: #fff;
+    text-shadow: 1px 1px 3px #000;
+
+    border-radius: 1.5rem;
+    margin: auto;
+    margin-top: 45px;
+    width: 60%;
+    border: rgb(141, 141, 141) solid 2px;
+  }
+  
+  #inputMemory {
+    margin: 20px auto;
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 10px 15px;
+    border-radius: 10px;
+    border: none;
+    width: 60%;
+    max-width: 90%;
+    margin-right: 10px;
+    
+    color: white;
+    background-color: rgba(49, 49, 49, 0.5);
+    box-shadow: 0 0 8px #666666;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    outline: none;
+
+}  
+
+#inputMemory:focus {
+    /* color: #whire; */
+    border-color: #ffffff86;
+    box-shadow: 0 0 20px 10px rgb(120, 120, 120);
+}
+
+.restart-button,
+.submit-button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.restart-button:hover,
+.submit-button:hover {
+  background-color: #45a049;
+}
+
+#game-message {
+  font-size: 100px;
+  font-weight: bold;
+  color: #ff4d4f; /* red for "Wrong! Game Over." */
+  margin-top: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+}

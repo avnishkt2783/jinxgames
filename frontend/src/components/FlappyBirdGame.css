@@ -1,0 +1,20 @@
+.flappy-bird-game {
+    background-color: #70c5ce;
+    position: relative;
+    width: 100vw;
+    height: 400px;
+    overflow: hidden;
+    margin: 0;
+  }
+  
+  .bird {
+    position: absolute;
+    background-color: rgb(72, 237, 255);
+    border-radius: 50%;
+  }
+  
+  .pipe {
+    background-color: rgb(255, 0, 208);
+    position: absolute;
+  }
+  

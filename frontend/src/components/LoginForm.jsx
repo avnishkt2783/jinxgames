@@ -3,7 +3,9 @@ import axios from "axios";
 import InputField from "./InputField";
 
 import { useNavigate, Link } from "react-router-dom";
+import { useAuth } from "../AuthContext";
 import "./Form.css";
+import AuthNavbar from "./AuthNavbar";
 
 const LoginForm = () => {
     const [form, setForm] = useState({
@@ -15,6 +17,7 @@ const LoginForm = () => {
     const [isSuccess, setIsSuccess] = useState(false);
     const [user, setUser] = useState(null);
 
+    const { login } = useAuth();
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -24,13 +27,29 @@ const LoginForm = () => {
         });
     };
 
+    
+    // const validateForm = () => {
+    //     const usernameRegex = /^[A-Za-z][A-Za-z0-9_]*$/;
+    //     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{10,}$/;
+
+    //     if (!usernameRegex.test(form.userName)) {
+    //         return "Invalid username format.";
+    //     }
+    //     if (!passwordRegex.test(form.password)) {
+    //         return "Invalid password format.";
+    //     }
+    //     return null;
+    // };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:3000/api/user/login", form);
-
-            setMessage(response.data?.message || "Login successful!");
+            const response = await axios.post("http://localhost:3000/api/login", form);
+            
+            const { token } = response.data;
+            login(token);
             setIsSuccess(true);
+            setMessage(response.data?.message || "Login successful!");
             setForm({
                 userName: "",
                 password: ""
@@ -44,12 +63,13 @@ const LoginForm = () => {
 
     useEffect(() => {
         if (user) {
-            navigate('/Home');
+            navigate('/home');
         }
     }, [user, navigate]);
 
     return (
-
+        <>
+        <AuthNavbar/>
         <div className="form-container">
             <h2 className="form-heading">Welcome Back!</h2>
             <form onSubmit={handleSubmit} className="form-wrapper">
@@ -81,7 +101,12 @@ const LoginForm = () => {
                 <p>New Registration : <Link to="/register">Register</Link></p>
             </form>
         </div>
+        </>
     );
 };
 
 export default LoginForm;
+
+
+
+

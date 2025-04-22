@@ -8,13 +8,12 @@ const LandingPage = () => {
     return(
         <div className="landing-container">
         <img id="logo" src="jinx.png" alt="" />
-        {/* <h1 className="title">🎮 JinxGames</h1> */}
         <p className="tagline">Unleash the fun. Compete. Win.</p>
         
         <div className="button-group">
             <button onClick={() => navigate('/login')} className="btn">Login</button>
             <button onClick={() => navigate('/register')} className="btn">Register</button>
-            <button onClick={() => navigate('/home')} className="btn">Enter Website</button>
+            <button onClick={() => navigate('/games')} className="btn">Enter Website</button>
         </div>
     </div>
   );

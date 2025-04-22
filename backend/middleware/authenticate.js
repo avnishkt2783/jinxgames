@@ -1,21 +1,34 @@
-import jwt from "jsonwebtoken"
+import jwt, { decode } from "jsonwebtoken";
+import dotenv from 'dotenv';
+dotenv.config();
 
-const authenticate = (req, res, next) =>{
+const whitelist = [
+    '/api/register',
+    '/api/login',
+    '/api/logout',
+    '/score',
+    'api/solomatches',
+
+    '/api/games' // Comment when not creating games : WAIT DOUBTFUL COMMENT
+];
+
+const authenticate = (req, res, next) => {
     try{
-        const authHeader = req.header('Authorization')
-        if(!authHeader){
-            return res.status(401).json({message: 'Access Denied. No Token Provided'})
-        }
+        if(whitelist.includes(req.path)) return next();
 
-        const token = authHeader.replace('Bearer ', '')
-        const decoded = jwt.verify(token, process.env.JWT_KEY)
+        const authHeader = req.headers.authorization;
+        if (!authHeader) 
+            return res.status(403).send('Token Required');
 
-        req.user = decoded
-        next()
+        const token = authHeader.split(' ')[1];
+        const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+        console.log('user', decoded);
+        req.user = decoded;
+
+        next();
     }
     catch(err){
-        console.error('JWT ERROR: ', err)
-        return res.status(401).json({message: 'Invalid or Token Expired.'})
+        if(err) return res.status(401).send('Token Expired')
     }
 }
 
