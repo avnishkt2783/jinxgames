@@ -4,8 +4,18 @@ import axios from "axios";
 import "./Universal.css";
 import "./MemoryGame.css";
 import Footer from "./Footer";
+import GameNav from "./GameNav";
 
 const MemoryGame = () => {
+  const apiURL = import.meta.env.VITE_API_URL;
+  const memoryInstructions = `
+  Instructions for Memory Game!
+  - You will be shown a Number Pattern in each round.
+  - In each subsequent rounds pattern length increases by 1.
+  - Try to type the correct pattern to keep going.
+  - Lets see who scores highest (Score = Rounds Passed)!
+`;
+
   const [sequence, setSequence] = useState([]);
   const [userInput, setUserInput] = useState("");
   const [round, setRound] = useState(1);
@@ -13,6 +23,20 @@ const MemoryGame = () => {
   const [message, setMessage] = useState("");
   const [gameOver, setGameOver] = useState(false);
   const [startTime, setStartTime] = useState(null);
+  const [highScore, setHighScore] = useState(0);
+
+  useEffect(() => {
+    const fetchHighScore = async () => {
+      try {
+        const res = await axios.get(`${apiURL}/solomatches/highscore/1`);
+        setHighScore(res.data.highScore);
+      } catch (err) {
+        console.error("Failed to fetch high score:", err);
+      }
+    };
+
+    fetchHighScore();
+  }, []);
 
   useEffect(() => {
     if (!gameOver) {
@@ -55,13 +79,13 @@ const MemoryGame = () => {
       const token = localStorage.getItem("token");
       const endTime = new Date();
       const response = await axios.post(
-        "http://localhost:3000/api/solomatches",
+        `${apiURL}/solomatches`,
         {
-          gameId: 1, // Memory Game
+          gameId: 1,
           startTime,
           endTime,
           score: finalScore,
-          outcome: "lose",
+          outcome: "score",
           metadata: {
             timeTaken: `${Math.round((endTime - startTime) / 1000)}s`,
             roundsCleared: finalScore,
@@ -98,6 +122,7 @@ const MemoryGame = () => {
   return (
     <>
       <Navbar />
+      <GameNav instructions={memoryInstructions} />
       <div
         style={{
           backdropFilter: "blur(10px)",
@@ -111,6 +136,7 @@ const MemoryGame = () => {
       >
         <h2 id="memory-gameTitle">🧠 Memory Game</h2>
         <p id="subMessage">Game has started, Remember the sequence below.</p>
+        <p id="high-score">High Score: {highScore}</p>
         <p id="roundStatus">Round: {round}</p>
         {showSequence ? (
           <h3 className="sequence-display">{sequence.join(" ")}</h3>

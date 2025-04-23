@@ -1,8 +1,10 @@
 import Game from '../models/game/game.js';
+import dotenv from 'dotenv'
+dotenv.config()
 
 export const getAllGames = async (req, res) => {
     try {
-        const limit = parseInt(req.query.limit) || 6;
+        const limit = parseInt(req.query.limit) || 100000;
         const offset = parseInt(req.query.offset) || 0;
 
         const { count, rows } = await Game.findAndCountAll({
@@ -17,12 +19,10 @@ export const getAllGames = async (req, res) => {
     }
 };
 
-//create the game
 export const createGame = async (req, res) => {
     try {
       const { gameName, gameImg, gameDesc, gameRoute } = req.body;
   
-      // Check if the game already exists
       const existingGame = await Game.findOne({ where: { gameName } });
       if (existingGame) {
         return res.status(400).json({ error: "Game already exists" });
@@ -111,7 +111,6 @@ export const createGame = async (req, res) => {
 // }
 // --------------------------------------------------------------------------------
 
-// Increment times played
 export const playGame = async (req, res) => {
   try {
     const game = await Game.findByPk(req.params.id);

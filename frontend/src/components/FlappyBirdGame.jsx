@@ -1,14 +1,23 @@
 import { useAuth } from "../AuthContext";
 import React, { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Navbar from "./Navbar";
-import "./FlappyBirdGame.css";
 import Footer from "./Footer";
+import "./FlappyBirdGame.css";
+import GameNav from "./GameNav";
 
 const gameId = 3;
 
 const FlappyBirdGame = () => {
+  const apiURL = import.meta.env.VITE_API_URL;
+  const flappyInstructions = `
+  Instructions for Flappy Bird!
+  - Press the spacebar to make bird fly.
+  - Avoid hitting the pipes and try to go as far as you can.
+  - The game ends if the bird crashes or falls.
+  - Good luck!
+`;
+
   const [birdY, setBirdY] = useState(250);
   const [birdVelocity, setBirdVelocity] = useState(0);
   const [gameOver, setGameOver] = useState(false);
@@ -16,22 +25,38 @@ const FlappyBirdGame = () => {
   const [pipes, setPipes] = useState([]);
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
-  const [pipeSpeed, setPipeSpeed] = useState(0.5); // 🌟 Initial slow speed
+  const [pipeSpeed, setPipeSpeed] = useState(0.5);
   const [startTime, setStartTime] = useState(null);
 
-  const birdHeight = 5; // in %
-  const birdWidth = 2; // in %
-  const pipeWidth = 5; // in %
-  const pipeGap = 40; // in % (gap between pipes)
+  const birdHeight = 5;
+  const birdWidth = 2;
+  const pipeWidth = 5;
+  const pipeGap = 40;
   const gravity = 0.2;
   const jumpStrength = -2.5;
 
   const gameArea = useRef(null);
-
+  const hasEndedRef = useRef(false);
   const { user } = useAuth();
+
+  useEffect(() => {
+    const fetchHighScore = async () => {
+      try {
+        const res = await axios.get(
+          `${apiURL}/solomatches/highscore/${gameId}`
+        );
+        setHighScore(res.data.highScore);
+      } catch (err) {
+        console.error("Failed to fetch high score:", err);
+      }
+    };
+
+    fetchHighScore();
+  }, []);
 
   const handleSpacebar = (e) => {
     if (e.code === "Space") {
+      e.preventDefault();
       if (!gameStarted) {
         startGame();
       } else if (!gameOver) {
@@ -41,7 +66,7 @@ const FlappyBirdGame = () => {
   };
 
   useEffect(() => {
-    window.addEventListener("keydown", handleSpacebar);
+    window.addEventListener("keydown", handleSpacebar, { passive: false });
     return () => {
       window.removeEventListener("keydown", handleSpacebar);
     };
@@ -59,22 +84,22 @@ const FlappyBirdGame = () => {
     setBirdVelocity(0);
     setPipes(generatePipes());
     setScore(0);
-    setPipeSpeed(0.5); // Reset to easy mode
+    setPipeSpeed(0.5);
     setGameOver(false);
     setStartTime(new Date());
     setGameStarted(true);
+    hasEndedRef.current = false;
   };
 
-  // const endGame = () => {
-  //   setGameOver(true);
-  //   setGameStarted(false);
-  //   setHighScore((prev) => Math.max(prev, score));
-  // };
-
   const endGame = async () => {
+    if (hasEndedRef.current) return;
+    hasEndedRef.current = true;
+
     setGameOver(true);
     setGameStarted(false);
-    setHighScore((prev) => Math.max(prev, score));
+
+    const newHighScore = Math.max(score, highScore);
+    setHighScore(newHighScore);
 
     const token = localStorage.getItem("token");
     if (!token) {
@@ -87,13 +112,13 @@ const FlappyBirdGame = () => {
 
     try {
       await axios.post(
-        "http://localhost:3000/api/solomatches",
+        `${apiURL}/solomatches`,
         {
-          gameId: 3,
+          gameId,
           startTime,
           endTime,
           score,
-          outcome: "scored",
+          outcome: "score",
           metadata: {
             pipeSpeed,
             timeTaken: `${timeTakenSeconds}s`,
@@ -110,69 +135,15 @@ const FlappyBirdGame = () => {
     }
   };
 
-  // const updateGame = () => {
-  //   setBirdY((prevY) => prevY + birdVelocity);
-  //   setBirdVelocity((prev) => prev + gravity);
-
-  //   // 🌟 Update speed based on score
-  //   setPipeSpeed(() => {
-  //     if (score < 5) return 2; // easy
-  //     else if (score < 10) return 3; // medium
-  //     else if (score < 20) return 4; // hard
-  //     else return 5; // max speed
-  //   });
-
-  //   setPipes((prevPipes) => {
-  //     let scored = false;
-  //     const newPipes = prevPipes.map((pipe) => {
-  //       const movedPipe = { ...pipe, x: pipe.x - pipeSpeed };
-  //       if (!pipe.passed && movedPipe.x + pipeWidth < 50) {
-  //         pipe.passed = true;
-  //         scored = true;
-  //       }
-  //       return movedPipe;
-  //     });
-
-  //     if (newPipes[0].x + pipeWidth < 0) {
-  //       newPipes.shift();
-  //       newPipes.push(generateNewPipe());
-  //     }
-
-  //     if (scored) setScore((prev) => prev + 1);
-
-  //     return newPipes;
-  //   });
-
-  //   if (birdY + birdHeight > 400 || birdY < 0) {
-  //     endGame();
-  //   }
-
-  //   pipes.forEach((pipe) => {
-  //     if (
-  //       pipe.x < 50 + birdWidth &&
-  //       pipe.x + pipeWidth > 50 &&
-  //       (birdY < pipe.y || birdY + birdHeight > pipe.y + pipeGap)
-  //     ) {
-  //       endGame();
-  //     }
-  //   });
-  // };
-
-  // Instead of raw pixels, use percentages of the container
   const updateGame = () => {
-    const gameHeight = gameArea.current?.clientHeight || 1;
-    const gameWidth = gameArea.current?.clientWidth || 1;
-
     setBirdY((prevY) => prevY + birdVelocity);
     setBirdVelocity((prev) => prev + gravity);
 
-    // Collision with top/bottom
     if (birdY + birdHeight > 100 || birdY < 0) {
       endGame();
       return;
     }
 
-    // Update pipes and check collisions
     setPipes((prevPipes) => {
       let scored = false;
       const newPipes = prevPipes.map((pipe) => {
@@ -191,7 +162,6 @@ const FlappyBirdGame = () => {
 
       if (scored) setScore((prev) => prev + 1);
 
-      // Bird collision with pipe
       newPipes.forEach((pipe) => {
         if (
           pipe.x < 5 + birdWidth &&
@@ -210,19 +180,10 @@ const FlappyBirdGame = () => {
     return Array.from({ length: 3 }, (_, i) => generateNewPipe(i));
   };
 
-  // const generateNewPipe = (i = 0) => {
-  //   const pipeHeight = Math.random() * (250 - 50) + 50;
-  //   return {
-  //     x: 600 + i * 200,
-  //     y: pipeHeight,
-  //     passed: false,
-  //   };
-  // };
-
   const generateNewPipe = (i = 0) => {
-    const pipeHeight = Math.random() * 40 + 10; // between 10% and 50%
+    const pipeHeight = Math.random() * 40 + 10;
     return {
-      x: 100 + i * 30, // start off-screen
+      x: 100 + i * 30,
       y: pipeHeight,
       passed: false,
     };
@@ -231,6 +192,7 @@ const FlappyBirdGame = () => {
   return (
     <>
       <Navbar />
+      <GameNav instructions={flappyInstructions} />
       <div
         className="flappy-bird-game"
         ref={gameArea}
@@ -244,24 +206,20 @@ const FlappyBirdGame = () => {
           borderRadius: "1.5rem",
         }}
       >
-        {/* Bird */}
-        <div
-          className="bird"
+        <img
+          src="/flappybirdIcon.gif"
+          alt="Flappy Bird"
           style={{
             position: "absolute",
             top: `${birdY}%`,
             left: "5%",
-            width: `${birdWidth}%`,
-            height: `${birdHeight}%`,
-            backgroundColor: "rgb(72, 237, 255)",
-            borderRadius: "50%",
+            width: "100px",
+            height: "100px",
+            objectFit: "contain",
           }}
         />
-
-        {/* Pipes */}
         {pipes.map((pipe, index) => (
           <React.Fragment key={index}>
-            {/* Top Pipe */}
             <div
               style={{
                 position: "absolute",
@@ -272,7 +230,6 @@ const FlappyBirdGame = () => {
                 backgroundColor: "rgb(210, 32, 178)",
               }}
             />
-            {/* Bottom Pipe */}
             <div
               style={{
                 position: "absolute",
@@ -285,8 +242,6 @@ const FlappyBirdGame = () => {
             />
           </React.Fragment>
         ))}
-
-        {/* Game Over */}
         {gameOver && (
           <div
             style={{
@@ -302,8 +257,6 @@ const FlappyBirdGame = () => {
             GAME OVER
           </div>
         )}
-
-        {/* Start Button */}
         {!gameStarted && (
           <>
             {!gameOver ? (
@@ -351,8 +304,6 @@ const FlappyBirdGame = () => {
             )}
           </>
         )}
-
-        {/* Score Display */}
         <div
           style={{
             textAlign: "right",

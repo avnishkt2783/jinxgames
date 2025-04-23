@@ -8,13 +8,13 @@ const whitelist = [
     '/api/logout',
     '/score',
     'api/solomatches',
-
-    '/api/games' // Comment when not creating games : WAIT DOUBTFUL COMMENT
+    '/api/solomatches/highscore',
+    '/api/games',
 ];
 
 const authenticate = (req, res, next) => {
     try{
-        if(whitelist.includes(req.path)) return next();
+        if (whitelist.some(path => req.path.startsWith(path))) return next();
 
         const authHeader = req.headers.authorization;
         if (!authHeader) 

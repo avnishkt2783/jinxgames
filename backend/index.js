@@ -8,9 +8,9 @@ import sequelize from "./config/db.js";
 import "./models/user/user.js";
 import "./models/game/game.js";
 
-import dotenv from 'dotenv';
 import authenticate from './middleware/authenticate.js';
 
+import dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
@@ -23,11 +23,11 @@ app.use(express.json());
 app.use(authenticate);
 app.use('/api', routes);
 
-sequelize.sync({ logging: console.log })
+sequelize.sync({})
     .then(()=>{
         console.log("MySQL Database Connected Successfully!!");
-        app.listen(3000,()=>{
-            console.log("Server is Up!! at http://localhost/3000");
+        app.listen(process.env.BACKEND_PORT,()=>{
+            console.log("Server is Up!!");
         });
     })
     .catch((err)=>{

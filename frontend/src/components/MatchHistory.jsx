@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./MatchHistory.css";
 
-// import Footer from "./Footer"; // DO NOT IMPORT / INSERT FOOTER HERE
-
 const MatchHistory = () => {
+  const apiURL = import.meta.env.VITE_API_URL;
   const [matches, setMatches] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const matchesPerPage = 10;
@@ -13,12 +12,9 @@ const MatchHistory = () => {
     const fetchMatches = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get(
-          "http://localhost:3000/api/solomatches/user",
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
+        const res = await axios.get(`${apiURL}/solomatches/user`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         setMatches(res.data);
       } catch (err) {
         console.error("Error fetching matches:", err);
@@ -67,8 +63,17 @@ const MatchHistory = () => {
                   <td>{new Date(match.startTime).toLocaleString()}</td>
                   <td>{new Date(match.endTime).toLocaleString()}</td>
                   <td>
-                    Time: {match.metadata?.timeTaken || "-"} | Lives:{" "}
-                    {match.metadata?.livesUsed ?? "-"}
+                    {match.metadata ? (
+                      <ul className="metadata-list">
+                        {Object.entries(match.metadata).map(([key, value]) => (
+                          <li key={key}>
+                            {key}: {String(value)}
+                          </li>
+                        ))}
+                      </ul>
+                    ) : (
+                      "-"
+                    )}
                   </td>
                 </tr>
               ))}

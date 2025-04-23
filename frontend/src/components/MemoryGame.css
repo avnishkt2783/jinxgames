@@ -8,7 +8,7 @@
     margin-bottom: 20px;
 }
 
-#roundStatus {
+#roundStatus, #high-score{
     font-size: 20px;
     color: #fff;
     margin-bottom: 30px;
@@ -48,7 +48,6 @@
 }  
 
 #inputMemory:focus {
-    /* color: #whire; */
     border-color: #ffffff86;
     box-shadow: 0 0 20px 10px rgb(120, 120, 120);
 }
@@ -74,7 +73,7 @@
 #game-message {
   font-size: 100px;
   font-weight: bold;
-  color: #ff4d4f; /* red for "Wrong! Game Over." */
+  color: #ff4d4f;
   margin-top: 10px;
   margin-bottom: 20px;
   text-align: center;

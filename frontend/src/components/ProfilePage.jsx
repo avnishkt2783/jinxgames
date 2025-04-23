@@ -32,7 +32,7 @@ const ProfilePage = () => {
             marginBottom: "20px",
           }}
         >
-          Match Histroy
+          Match History
         </h2>
         <MatchHistory />
       </div>

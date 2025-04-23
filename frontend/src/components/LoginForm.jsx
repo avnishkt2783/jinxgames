@@ -10,6 +10,7 @@ import "./Universal.css";
 import Footer from "./Footer";
 
 const LoginForm = () => {
+  const apiURL = import.meta.env.VITE_API_URL;
   const [form, setForm] = useState({
     userName: "",
     password: "",
@@ -32,10 +33,7 @@ const LoginForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:3000/api/login",
-        form
-      );
+      const response = await axios.post(`${apiURL}/login`, form);
 
       const { token } = response.data;
       login(token);
@@ -56,7 +54,7 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (user) {
-      navigate("/home");
+      navigate("/dashboard");
     }
   }, [user, navigate]);
 
@@ -94,7 +92,10 @@ const LoginForm = () => {
             </p>
           )}
           <p>
-            New Registration : <Link to="/register">Register</Link>
+            New Here?{" "}
+            <Link to="/register">
+              <button className="form-button">Register</button>
+            </Link>
           </p>
         </form>
       </div>

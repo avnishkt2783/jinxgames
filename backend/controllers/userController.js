@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from "bcrypt";
-import dotenv from 'dotenv';
-dotenv.config();
+import dotenv from 'dotenv'
+dotenv.config()
 
 import User from "../models/user/user.js";
 import Auth from "../models/auth/auth.js";
@@ -53,7 +53,6 @@ export const createUser = async (req, res) => {
     }
 };
 
-// Login User
 export const loginUser = async (req, res) => {
     try {
         const { userName, password } = req.body;
@@ -79,7 +78,6 @@ export const loginUser = async (req, res) => {
             token: token,
         });
 
-        // Optional: Update isLoggedIn status
         user.isLoggedIn = true;
         await user.save();
 
@@ -115,7 +113,6 @@ export const getUserProfile = async (req, res) => {
 export const getAllUsers = async (req, res) => {
     try{
         const users = await User.findAll({
-            // attributes: ['userId', 'userName', 'email', ...]
         });
 
         res.json(users);
@@ -144,7 +141,6 @@ export const logoutUser = async (req, res) => {
             where: { userId: user.userId }
         });
 
-        // Update user status
         user.isLoggedIn = false;
         await user.save();
 

@@ -1,11 +1,10 @@
 import { Routes, Route, Link } from "react-router-dom";
 import "./Navbar.css";
-import { useAuth } from "../AuthContext"; // ✅ make sure path is correct
-import LogoutButton from "./LogoutButton"; // ✅ import the logout button
-import ProfilePage from "./ProfilePage";
+import { useAuth } from "../AuthContext";
+import LogoutButton from "./LogoutButton";
 
 function Navbar() {
-  const { token } = useAuth(); // ✅ check if user is logged in
+  const { token } = useAuth();
 
   return (
     <>
@@ -16,9 +15,16 @@ function Navbar() {
           </Link>
         </div>
         <div>
-          <Link to="/home" className="navLinks">
-            Home
-          </Link>
+          {token ? (
+            <>
+              <Link to="/dashboard" className="navLinks">
+                Dashboard
+              </Link>
+            </>
+          ) : (
+            <></>
+          )}
+
           <Link to="/games" className="navLinks">
             Games
           </Link>
@@ -33,7 +39,7 @@ function Navbar() {
           ) : (
             <Link to="/login" className="navLinks">
               Login
-            </Link> // ✅ show login if logged out
+            </Link>
           )}
         </div>
       </nav>

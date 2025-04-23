@@ -1,23 +1,20 @@
-// src/components/GamesPage.jsx
-import React from "react";
-import Navbar from "./Navbar";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
+import axios from "axios";
 import { useAuth } from "../AuthContext";
 import "./GameCard.css";
-import Footer from "./Footer";
 
 const GamesPage = () => {
+  const apiURL = import.meta.env.VITE_API_URL;
   const [games, setGames] = useState([]);
   const [offset, setOffset] = useState(0);
   const [totalGames, setTotalGames] = useState(0);
   const [showAll, setShowAll] = useState(false);
-
   const { token } = useAuth();
-
-  const limit = 6;
   const navigate = useNavigate();
+  const limit = 3;
 
   useEffect(() => {
     fetchGames(0, false);
@@ -30,17 +27,16 @@ const GamesPage = () => {
     }
     try {
       await axios.post(
-        `http://localhost:3000/api/games/${gameId}/play`,
+        `${apiURL}/games/${gameId}/play`,
         {},
         {
           headers: {
-            Authorization: `Bearer ${token}`, // ✅ Pass token here
+            Authorization: `Bearer ${token}`,
           },
         }
       );
-
-      fetchGames(0, false); // refresh game data
-      navigate(route); // go to the game
+      fetchGames(0, false);
+      navigate(route);
     } catch (err) {
       console.error("Error updating times played:", err);
     }
@@ -49,10 +45,8 @@ const GamesPage = () => {
   const fetchGames = async (newOffset, append = true) => {
     try {
       const res = await axios.get(
-        `http://localhost:3000/api/games?limit=${limit}&offset=${newOffset}`
+        `${apiURL}/games?limit=${limit}&offset=${newOffset}`
       );
-
-      console.log(res.data); // Add this line
       const { games: newGames, total } = res.data;
       setTotalGames(total);
       if (append) {
@@ -70,7 +64,6 @@ const GamesPage = () => {
       }
     } catch (error) {
       console.error("Error fetching games:", error);
-      setHasMore(false);
     }
   };
 
@@ -90,12 +83,10 @@ const GamesPage = () => {
   return (
     <>
       <Navbar />
-      <div style={{ textAlign: "center", marginTop: "20px" }}>
+      <div className="games-container">
         <h1>All Games</h1>
         {games.length === 0 ? (
-          <p style={{ fontSize: "20px", marginTop: "40px" }}>
-            🎮 No Games Available
-          </p>
+          <p className="no-games-text">🎮 No Games Available</p>
         ) : (
           <>
             <div className="game-grid">
@@ -107,7 +98,6 @@ const GamesPage = () => {
                   <p>
                     <strong>Times Played:</strong> {game.timesPlayed}
                   </p>
-
                   <button
                     onClick={() => handlePlay(game.gameId, game.gameRoute)}
                   >

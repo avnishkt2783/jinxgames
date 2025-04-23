@@ -1,11 +1,10 @@
 [
-    { "word": "APPLE", "hint": "It's a fruit" },
-    { "word": "ELEPHANT", "hint": "It's a large animal" },
-    { "word": "PYTHON", "hint": "A programming language and a snake" },
-    { "word": "BANANA", "hint": "Yellow curved fruit" },
-    { "word": "GUITAR", "hint": "A musical instrument" },
-    { "word": "MOON", "hint": "Visible in the night sky" },
-    { "word": "BASKETBALL", "hint": "A sport with hoops" },
-    { "word": "LAPTOP", "hint": "Portable computer" }
-  ]
-  
+  { "word": "APPLE", "hint": "It's a fruit" },
+  { "word": "ELEPHANT", "hint": "It's a large animal" },
+  { "word": "PYTHON", "hint": "A programming language and a snake" },
+  { "word": "BANANA", "hint": "Yellow curved fruit" },
+  { "word": "GUITAR", "hint": "A musical instrument" },
+  { "word": "MOON", "hint": "Visible in the night sky" },
+  { "word": "BASKETBALL", "hint": "A sport with hoops" },
+  { "word": "LAPTOP", "hint": "Portable computer" }
+]

@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 import "./RPSGame.css";
 import "./Universal.css";
 import Footer from "./Footer";
+import GameNav from "./GameNav";
 
 const choices = ["rock", "paper", "scissors"];
 const choiceEmojis = {
@@ -13,6 +14,15 @@ const choiceEmojis = {
 };
 
 const RPSGame = () => {
+  const apiURL = import.meta.env.VITE_API_URL;
+
+  const rpsInstructions = `
+    Instructions for Rock Paper Scissors!
+    - Choose Rock, Paper, or Scissors.
+    - Rock beats Scissors, Scissors beats Paper, Paper beats Rock.
+    - You are playing against Computer, it choses automatically!
+  `;
+
   const [userChoice, setUserChoice] = useState("");
   const [computerChoice, setComputerChoice] = useState("");
   const [result, setResult] = useState("");
@@ -43,7 +53,7 @@ const RPSGame = () => {
     try {
       const token = localStorage.getItem("token");
       const response = await axios.post(
-        "http://localhost:3000/api/solomatches",
+        `${apiURL}/solomatches`,
         {
           gameId: 2,
           startTime: new Date(),
@@ -68,6 +78,7 @@ const RPSGame = () => {
   return (
     <>
       <Navbar />
+      <GameNav instructions={rpsInstructions} />
       <div className="rps-container">
         <h2 className="rps-title">Rock Paper Scissors</h2>
         <p>Choose Your Sign.</p>
@@ -82,22 +93,26 @@ const RPSGame = () => {
             </button>
           ))}
         </div>
-        <div className="rps-results">
-          <div className="rps-choice-row">
-            <div className="rps-info">
-              You
-              <div className="rps-choice-icon">{choiceEmojis[userChoice]}</div>
-            </div>
-            <div className="rps-info">
-              Computer
-              <div className="rps-choice-icon">
-                {choiceEmojis[computerChoice]}
+        {userChoice && (
+          <div className="rps-results">
+            <div className="rps-choice-row">
+              <div className="rps-info">
+                You
+                <div className="rps-choice-icon">
+                  {choiceEmojis[userChoice]}
+                </div>
+              </div>
+              <div className="rps-info">
+                Computer
+                <div className="rps-choice-icon">
+                  {choiceEmojis[computerChoice]}
+                </div>
               </div>
             </div>
-          </div>
 
-          <h3 className="rps-result">{result && `${result.toUpperCase()}`}</h3>
-        </div>
+            <h3 className="rps-result">{result.toUpperCase()}</h3>
+          </div>
+        )}
       </div>
       <Footer />
     </>

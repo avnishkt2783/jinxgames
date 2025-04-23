@@ -5,12 +5,20 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem("token"));
+
   const [user, setUser] = useState(() => {
     const savedToken = localStorage.getItem("token");
+    if (!savedToken) return null;
 
-    console.log("Decoded user:", jwtDecode(savedToken));
-
-    return savedToken ? jwtDecode(savedToken) : null;
+    try {
+      const decoded = jwtDecode(savedToken);
+      console.log("Decoded user:", decoded);
+      return decoded;
+    } catch (err) {
+      console.error("Invalid token:", err);
+      localStorage.removeItem("token");
+      return null;
+    }
   });
 
   useEffect(() => {

@@ -61,3 +61,14 @@
     cursor: not-allowed;
   }
   
+  .metadata-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+  }
+  
+  .metadata-list li {
+    margin: 2px 0;
+  }
+  

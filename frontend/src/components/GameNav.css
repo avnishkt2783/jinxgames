@@ -1,0 +1,48 @@
+.gameNav {
+    display: flex;
+    gap: 10px;
+    justify-content: left;
+    padding: 1rem;
+    background-color: #00000075;
+    width: 100%;
+  }
+
+  .gameNav #gameNav-back {
+    padding: 0.5rem 1rem;
+    background-color: #ff000043;
+    color: #fff;
+    border: red solid 1px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .gameNav #gameNav-back:hover {
+    padding: 0.5rem 1rem;
+    background-color: #ff000098;
+    color: #fff;
+    border: red solid 1px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .gameNav #gameNav-info {
+    padding: 0.5rem 1rem;
+    background-color: #0d00ff43;
+    color: #fff;
+    border: blue solid 1px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .gameNav #gameNav-info:hover {
+    padding: 0.5rem 1rem;
+    background-color: #0d00ff98;
+    color: #fff;
+    border: blue solid 1px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  

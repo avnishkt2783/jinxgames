@@ -1,8 +1,21 @@
-  .game-grid {
+.games-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.no-games-text {
+  font-size: 20px;
+  margin-top: 40px;
+}
+
+.game-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 20px;
-  padding: 20px;
+  margin-top: 20px;
   justify-items: center;
 }
 
@@ -11,7 +24,7 @@
   color: #fff;
   padding: 20px;
   border-radius: 16px;
-  width: 100%;
+  width: 85%;
   max-width: 320px;
   box-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
   text-align: center;
@@ -34,7 +47,7 @@
 .game-card h3 {
   margin: 10px 0 5px;
   font-size: 1.3rem;
-  color: #ffeb3b;
+  color: #ffffff;
 }
 
 .game-card p {
@@ -56,5 +69,21 @@
 }
 
 .game-card button:hover {
+  background-color: #1565c0;
+}
+
+.show-more-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #1e88e5;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.show-more-btn:hover {
   background-color: #1565c0;
 }

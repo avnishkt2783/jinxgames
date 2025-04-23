@@ -1,22 +1,59 @@
 .landing-container {
   text-align: center;
-  color: #fff;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  align-items: center;
+  padding: 2rem;
+  z-index: 2;
+  position: relative;
+  transition: transform 0.6s ease-in-out;
 }
 
-.title {
-  font-size: 3rem;
-  margin-bottom: 1rem;
+@keyframes rotateIn {
+  from {
+    transform: rotate(-360deg);
+    opacity: 0;
+  }
+  to {
+    transform: rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes rotateOnScroll {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rotate-on-load {
+  animation: rotateIn 1s ease-out;
+}
+
+.rotate-on-scroll {
+  animation: rotateOnScroll 0.6s ease-in-out;
+}
+
+#logo {
+  width: 750px;
+  transition: all 0.7s ease;
+}
+
+.landing-container.scrolled #logo {
+  width: 0px;
+  opacity: 0;
 }
 
 .tagline {
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
+  font-size: 1.5rem;
   color: #ccc;
+  margin: 1rem 0 2rem;
+  transition: all 0.5s ease;
 }
 
 .button-group {
@@ -34,10 +71,443 @@
   color: white;
   font-weight: bold;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+  width: 300px;
 }
 
 .btn:hover {
   background-color: #c9184a;
   transform: scale(1.05);
+}
+
+.fade-in {
+  animation: fadeIn 1s ease-in both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#logo.logo-small {
+  width: 100px;
+  transition: all 0.7s ease;
+  opacity: 0.5;
+}
+
+.fade-out {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.5s ease;
+  pointer-events: none;
+}
+
+.info-section {
+  min-height: 100vh;
+  padding: 100px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.content-box {
+  max-width: 100%;
+  text-align: right;
+  padding: 20px;
+}
+
+.content-box h1 {
+  font-size: 30px;
+}
+.game-world-section {
+  color: #fff;
+  padding: 80px 20px;
+}
+
+.with-image {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.text-content {
+  flex: 1;
+  min-width: 40%;
+  padding: 20px;
+}
+
+.image-content {
+  flex: 1;
+  min-width: 40%;
+  padding: 20px;
+}
+
+.image-content img {
+  width: 100%;
+  border-radius: 12px;
+}
+
+.zoom-in {
+  animation: zoomIn 1.2s ease forwards;
+  opacity: 0;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInOutRounded {
+  0% {
+    opacity: 0;
+    border-radius: 0%;
+    transform: scale(0.95);
+  }
+  25% {
+    opacity: 1;
+    border-radius: 20px;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    border-radius: 50%;
+    transform: scale(0.98);
+  }
+  75% {
+    opacity: 1;
+    border-radius: 20px;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    border-radius: 0%;
+    transform: scale(0.95);
+  }
+}
+
+.animated-img {
+  width: 100%;
+}
+
+.group-members-container {
+  text-align: center;
+  padding: 3rem 2rem;
+  color: white;
+}
+
+.group-members-container h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.member-card {
+  perspective: 1000px;
+
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.member-card-inner {
+  width: 100%;
+  height: 350px;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+}
+
+.member-card:hover .member-card-inner {
+  transform: rotateY(180deg);
+}
+
+.member-card-front,
+.member-card-back {
+  position: absolute;
+  width: 70%;
+  height: 90%;
+  backface-visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.member-card-front {
+  flex-direction: column;
+  text-align: center;
+  background-color: #6b6b6b8a;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.member-card-back {
+  flex-direction: column;
+  background-color: #6b6b6b8a;
+  color: white;
+  border-radius: 10px;
+  transform: rotateY(180deg);
+  padding: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.group-members-container .member-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}
+
+.group-members-container h3 {
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+}
+
+.group-members-container p , .group-members-container pre {
+  font-size: 1rem;
+}
+
+.enter-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 20px 24px;
+  font-size: 18px;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  z-index: 1000;
+  background-image: url('/jinx_scene2.gif');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  color: white;
+  font-size: 20px;
+  text-shadow: 0 0 5px #000, 0 0 10px #000, 0 0 15px #000;
+}
+
+.enter-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(1px);
+  background-color: rgba(0, 0, 0, 0.3); 
+  border-radius: 14px;
+  z-index: 0;
+}
+
+.enter-btn span {
+  position: relative;
+  z-index: 1;
+}
+.enter-btn:hover {
+  transform: scale(1.06);
+  opacity: 0.9;
+}
+
+.games-list-section {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #111;
+  color: white;
+}
+
+.glow-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  text-shadow: 0 0 10px #00f7ff, 0 0 20px #00f7ff;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+.games-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  animation: slideIn 2s ease-in-out;
+}
+
+.game-item {
+  background: linear-gradient(145deg, #1f1f1f, #2b2b2b);
+  border: 2px solid #00f7ff;
+  border-radius: 10px;
+  padding: 15px 25px;
+  font-size: 1.2rem;
+  color: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
+}
+
+.game-item:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 0 20px #00f7ff;
+  background: linear-gradient(145deg, #2b2b2b, #1f1f1f);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.game-list-section {
+  padding: 40px 20px;
+  background: #0f0f0f;
+  color: #fff;
+  text-align: center;
+}
+
+.game-list-title {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  animation: fadeInUp 1s ease-in-out;
+}
+
+.game-list-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.game-item {
+  background: #1c1c1c;
+  border-radius: 16px;
+  padding: 20px;
+  width: 260px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: slideIn 0.5s ease forwards;
+  box-shadow: 0 0 10px rgba(255, 0, 255, 0.2);
+}
+
+.game-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+}
+
+.game-icon {
+  width: 100%;
+  height: 140px;
+  object-fit: contain;
+  margin-bottom: 15px;
+}
+
+.game-info h4 {
+  font-size: 1.2rem;
+  color: #00ffd5;
+  margin-bottom: 8px;
+}
+
+.game-info p {
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.bullet-list-section {
+  padding: 50px 20px;
+  background-color: #0f0f0f00;
+  color: #fff;
+  text-align: left;
+  max-width: 80%;
+  margin: 0 auto;
+  font-size: 20px;
+}
+
+.bullet-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.bullet-item {
+  opacity: 0;
+  transform: translateX(-200px);
+  transition: transform 1s ease, opacity 1s ease;
+  font-size: 20px;
+  margin: 20px 0;
+  line-height: 1.6;
+  display: flex;
+  align-items: flex-start;
+}
+
+.bullet-dot {
+  color: #00ffd500;
+}
+
+.bullet-item.slide-in {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.bullet-item.slide-out {
+  opacity: 0;
+  transform: translateX(-40px);
 }

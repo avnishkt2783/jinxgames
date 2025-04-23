@@ -1,0 +1,111 @@
+.mosquito-game-wrapper {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.gameArea {
+  width: 80%;
+  height: 80%;
+  margin: 10px auto;
+  position: relative;
+  background: rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  border-radius: 12px;
+  border: 2px solid #000000;
+}
+
+.topBar {
+  color: rgb(255, 255, 255);
+  display: flex;
+  justify-content: space-around;
+  padding: 1rem;
+  font-size: 1.1rem;
+}
+
+.healthBarContainer {
+  height: 10px;
+  width: 80%;
+  margin: 0 auto;
+  background-color: #a4a4a4;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.healthBarFill {
+  height: 100%;
+  background-color: #ff1100;
+  border-radius: 5px;
+}
+
+.mosquitoImg {
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  cursor: pointer;
+}
+
+.splash {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background-color: red;
+  border-radius: 50%;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.gameOverBox {
+  text-align: center;
+  background: rgba(255, 0, 0, 0.05);
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.gameOverTitle {
+  font-size: 2rem;
+  color: #ff3d00;
+}
+
+.scoreText {
+  color: #000000;
+  font-size: 1.1rem;
+}
+
+.restartButton {
+  background-color: #43a047;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.restartButton:hover {
+  background-color: #66bb6a;
+}
+
+.mosquitoGameOver {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.mosquitoGameOver button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+.mosquitoGameOver button:hover {
+  background-color: #45a049;
+}

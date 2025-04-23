@@ -29,16 +29,15 @@ const soloMatch = sequelize.define("SoloMatch", {
     defaultValue: 0,
   },
   outcome: {
-    type: DataTypes.STRING, // "win", "lose", "draw", etc.
+    type: DataTypes.STRING, 
   },
   metadata: {
-    type: DataTypes.JSON, // Game-specific info: moves, time taken, lives used, etc.
+    type: DataTypes.JSON,
   }
 }, {
   freezeTableName: true,
 });
 
-// Associations
 soloMatch.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE' });
 User.hasMany(soloMatch, { foreignKey: 'userId' });
 

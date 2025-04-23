@@ -22,7 +22,6 @@ const auth = sequelize.define("auth", {
   tableName: 'auth'
 });
 
-// Relationship with User
 auth.belongsTo(User, {
   foreignKey: 'userId',
   onDelete: 'CASCADE'

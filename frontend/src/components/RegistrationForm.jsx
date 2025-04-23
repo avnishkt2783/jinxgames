@@ -1,5 +1,4 @@
 import axios from "axios";
-// import InputField from "./InputField"
 import InputField from "./InputField";
 import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
@@ -10,6 +9,7 @@ import "./Universal.css";
 import Footer from "./Footer";
 
 const RegistrationForm = () => {
+  const apiURL = import.meta.env.VITE_API_URL;
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
@@ -57,11 +57,8 @@ const RegistrationForm = () => {
       return;
     }
     try {
-      const { confirmPassword, ...formData } = form; // exclude confirmPassword
-      const response = await axios.post(
-        "http://localhost:3000/api/register",
-        formData
-      );
+      const { confirmPassword, ...formData } = form;
+      const response = await axios.post(`${apiURL}/register`, formData);
 
       const { token } = response.data;
       login(token);
@@ -83,7 +80,7 @@ const RegistrationForm = () => {
 
   useEffect(() => {
     if (user) {
-      navigate("/home");
+      navigate("/dashboard");
     }
   }, [user, navigate]);
 
@@ -91,7 +88,7 @@ const RegistrationForm = () => {
     <>
       <AuthNavbar />
       <div className="form-container">
-        <h2 className="form-heading">Welcome Player!</h2>
+        <h2 className="form-heading">New Registration!</h2>
         <form onSubmit={handleSubmit} className="form-wrapper">
           <InputField
             type="text"
@@ -138,7 +135,10 @@ const RegistrationForm = () => {
             </p>
           )}
           <p>
-            Already Registered : <Link to="/login">Login</Link>
+            Already Registered?{" "}
+            <Link to="/login">
+              <button className="form-button">Login</button>
+            </Link>
           </p>
         </form>
       </div>
